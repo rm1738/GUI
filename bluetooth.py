@@ -31,5 +31,5 @@ def notification_handler(sender, data):
 if __name__ == "__main__":
     address = ""  # Replace with the Bluetooth device address
     uuid = ""  # Replace with the UUID of the characteristic to write to and notify
-    data = [0x01, 0x02, 0x03]  # Replace with the data to send
-    asyncio.run(connect_and_send_data(address, uuid, data))
+    data = ['w']  # Replace with the data to send
+

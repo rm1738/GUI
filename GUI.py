@@ -1,4 +1,7 @@
+import asyncio
 import PySimpleGUI as sg
+
+# bluetooth.py>
 sg.theme('Black')  # Set the color scheme
 
 avg_temp = [sg.Text(text="Avg Temp\n\n _ _ _ °F", justification="center", border_width=6, key="Avg Temp",
@@ -17,6 +20,21 @@ layout = [
     [sg.Column([buttons], vertical_alignment="bottom"),
      sg.Column(total_temp, vertical_alignment="bottom")]]
 
+
+def update_value(key: str, value: float, celsius: bool):
+    if celsius:
+        window[key].update(f"{key}\n\n {value} °C")
+    else:
+        window[key].update(f"{key}\n\n {value} °F")
+    window.refresh()
+
+
+def change_unit(value, celsius):
+    if celsius:
+        return round((value * 9 / 5) + 32, 2)
+    return round((value - 32) * 5 / 9, 2)
+
+
 window = sg.Window(title='Autonomous Vehicle GUI', layout=layout)  # Create the window with the title and layout
 
 while True:
@@ -25,5 +43,7 @@ while True:
         break  # Exit the loop and close the window
     elif event == "Quit":  # If the user clicks the quit button
         break  # Exit the loop and close the window
+    elif event == "Start/Stop":
+        break
 
 window.close()  # Close the window when the loop exits
